@@ -1,0 +1,23 @@
+{
+	"name": "kitsune-server",
+	"version": "1.0.0",
+	"description": "The server companion to https://github.com/betaredex/kitsune",
+	"main": "index.js",
+	"bin": {
+		"kitsune-server": "./server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/betaredex/kitsune.git"
+	},
+	"author": "Elliot Brock",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/betaredex/kitsune/issues"
+	},
+	"homepage": "https://github.com/betaredex/kitsune#readme",
+	"dependencies": {
+		"express": "^4.14.0",
+		"js-yaml": "^3.7.0"
+	}
+}
