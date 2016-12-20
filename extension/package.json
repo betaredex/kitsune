@@ -1,10 +1,9 @@
 {
-	"name": "kitsune-server",
-	"version": "1.0.1",
-	"description": "The server companion to https://github.com/betaredex/kitsune",
-	"main": "index.js",
-	"bin": {
-		"kitsune-server": "./server.js"
+	"name": "kitsune",
+	"version": "1.0.0",
+	"description": "The kitsune extension.",
+	"scripts": {
+		"webpack": "webpack --watch"
 	},
 	"repository": {
 		"type": "git",
@@ -16,8 +15,9 @@
 		"url": "https://github.com/betaredex/kitsune/issues"
 	},
 	"homepage": "https://github.com/betaredex/kitsune#readme",
-	"dependencies": {
-		"express": "^4.14.0",
-		"js-yaml": "^3.7.0"
+	"devDependencies": {
+		"coffee-loader": "^0.7.2",
+		"file-loader": "^0.9.0",
+		"webpack": "^1.14.0"
 	}
 }
