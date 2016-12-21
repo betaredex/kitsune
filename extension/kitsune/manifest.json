@@ -2,7 +2,7 @@
 
 	"manifest_version": 2,
 	"name": "kitsune",
-	"version": "1.0",
+	"version": "1.1.0",
 
 	"description": "Your browser, but with a config file!",
 
@@ -12,9 +12,8 @@
 
 	"content_scripts": [
 		{
-			"matches": ["*"],
-			"js": ["index.js"]
+			"matches": ["http://*/*"],
+			"js": ["bundle.js"]
 		}
-	],
-
+	]
 }

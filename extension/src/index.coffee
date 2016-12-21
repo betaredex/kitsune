@@ -1,11 +1,13 @@
 req = new XMLHttpRequest()
-req.onreadystatechange ->
-	doc = JSON.parse req.responseText
-	for url in doc.styles
-		regex = new RexExp url, ''
-		if window.location.href.match regex
-			for stylesheet in document.styleSheets
-				stylesheet.disabled = true
-			document.styleSheets.push doc.styles[url]
-req.open 'GET', 'localhost:3000/'
+
+req.onreadystatechange = ->
+	if @readyState == 4 && @status == 200
+		text = req.responseText
+		text = text.replace /\n|\r/g, " "
+		style = document.createElement 'style'
+		style.type = 'text/css'
+		style.innerText = text
+		document.head.appendChild style
+
+req.open "GET", "http://localhost:3000/styles?url=#{window.location.hostname}"
 req.send()

@@ -14,20 +14,34 @@
 
   server = http.createServer(app);
 
-  app.get('/', function(req, res) {
-    var doc, i, len, ref, url;
-    doc = yaml.safeLoad(fs.readFileSync(process.env.HOME + "/.config/kitsune.yml", 'utf8'));
-    ref = Object.keys(doc.styles);
-    for (i = 0, len = ref.length; i < len; i++) {
-      url = ref[i];
-      if (fs.existsSync(doc.styles[url])) {
-        doc.styles[url] = fs.readFileSync(doc.styles[url], 'utf8');
-      }
-    }
-    return res.send(JSON.stringify(doc));
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    return next();
   });
 
-  server.listen(3000, 'localhost');
+  app.get('/styles', function(req, res) {
+    var doc, i, len, re, ref, regex, success, url;
+    doc = yaml.safeLoad(fs.readFileSync(process.env.HOME + "/.config/kitsune.yml", 'utf8'));
+    url = req.query.url.replace(/"/g, "");
+    console.log("New request from " + url);
+    ref = Object.keys(doc.styles);
+    for (i = 0, len = ref.length; i < len; i++) {
+      re = ref[i];
+      regex = new RegExp(re);
+      if (url.match(regex) && fs.existsSync(doc.styles[re])) {
+        success = re;
+        break;
+      }
+    }
+    if (success) {
+      return res.status(200).sendFile(doc.styles[success]);
+    } else {
+      return res.sendStatus(404);
+    }
+  });
+
+  server.listen(3000);
 
   server.on('listening', function() {
     return console.log('Serving kitsune.yml!');

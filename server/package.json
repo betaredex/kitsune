@@ -1,6 +1,6 @@
 {
 	"name": "kitsune-server",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "The server companion to https://github.com/betaredex/kitsune",
 	"main": "index.js",
 	"bin": {
